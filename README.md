@@ -65,6 +65,7 @@ Optional:
 
 
 ## TBLASTN-based check of genes missing in annotation
+This scripts performs a search for genes that were missed in the annotation process. The results of a TBLASTN are processed and hits are compared against the annotated genes in a GFF3 file. Genes hit in the search or the genomic position of a hit is returned in the output file. This enables a phylogenetic evaluation of the candidates.
 
 
 ```
