@@ -67,6 +67,26 @@ Optional:
 ## TBLASTN-based check of genes missing in annotation
 
 
+```
+Usage:
+  python TBLASTN_check.py --in <FILE> --out <FILE> --ref <FILE> --gff <FILE>
+
+Mandatory:
+  --in    STR   Tree file. 
+  --out     STR   Sequence ouptut file.
+  --ref     STR   Sequence input file.
+  --gff     STR   Annotation file.
+```
+
+`--in` FASTA input file containing the bait sequence(s).
+
+`--out` output folder for temporary and final output files.
+
+`--ref` genome sequence FASTA file.
+
+`--gff` annotation file (GFF3) corresponding to the genome sequence FASTA file.
+
+
 
 ## References
 
