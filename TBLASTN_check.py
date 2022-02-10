@@ -1,5 +1,5 @@
 ### Boas Pucker ###
-### v0.1 ###
+### v0.11 ###
 ### b.pucker@tu-bs.de ###
 
 __usage__ = """ 
@@ -27,11 +27,12 @@ def load_gene_positions_per_chr( gff_file ):
 		while line:
 			if line[0] != "#":
 				parts = line.strip().split('\t')
-				if parts[2] == "gene":
-					try:
-						gene_pos_per_chr[ parts[0] ].append( { 'start': int( parts[3] ), 'end': int( parts[4] ), 'id': parts[-1] } )
-					except KeyError:
-						gene_pos_per_chr.update( { parts[0]: [ { 'start': int( parts[3] ), 'end': int( parts[4] ), 'id': parts[-1] } ] } )
+				if len( parts ) > 2:
+					if parts[2] == "gene":
+						try:
+							gene_pos_per_chr[ parts[0] ].append( { 'start': int( parts[3] ), 'end': int( parts[4] ), 'id': parts[-1] } )
+						except KeyError:
+							gene_pos_per_chr.update( { parts[0]: [ { 'start': int( parts[3] ), 'end': int( parts[4] ), 'id': parts[-1] } ] } )
 			line = f.readline()
 	return gene_pos_per_chr
 
