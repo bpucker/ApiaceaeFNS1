@@ -67,23 +67,23 @@ Optional:
 
 
 ## TBLASTN-based check of genes missing in annotation
-This scripts performs a search for genes that were missed in the annotation process. The results of a TBLASTN are processed and hits are compared against the annotated genes in a GFF3 file. Genes hit in the search or the genomic position of a hit is returned in the output file. This enables a phylogenetic evaluation of the candidates.
+This scripts performs a search for genes that were missed in the annotation process. The results of a TBLASTN are processed and hits are compared against the annotated genes in a GFF3 file. If a gene is bit by BLAST, the ID is returned in the output file. The genomic position of a BLAST hit is returned if no gene is hit. This enables a phylogenetic evaluation of the candidates.
 
 
 ```
 Usage:
-  python TBLASTN_check.py --in <FILE> --out <FILE> --ref <FILE> --gff <FILE>
+  python3 TBLASTN_check.py --in <FILE> --out <FILE> --ref <FILE> --gff <FILE>
 
 Mandatory:
-  --in    STR   Tree file. 
-  --out     STR   Sequence ouptut file.
-  --ref     STR   Sequence input file.
-  --gff     STR   Annotation file.
+  --in    STR   FASTA file. 
+  --out   STR   Ouptut folder.
+  --ref   STR   Reference FASTA file.
+  --gff   STR   Annotation file.
 ```
 
 `--in` FASTA input file containing the bait sequence(s).
 
-`--out` output folder for temporary and final output files.
+`--out` output folder for temporary and final output files. This folder will be created if it does not exist already.
 
 `--ref` genome sequence FASTA file.
 
