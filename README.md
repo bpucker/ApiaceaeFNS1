@@ -36,7 +36,7 @@ Optional:
 
 
 ## Extract sequences of highlighted clade
-Extract the sequences belonging to IDs that are highlighted in a phylogenetic tree. This scripts enables to selection of specific clades after inspecting a tree.
+Extract the sequences belonging to IDs that are highlighted in a phylogenetic tree. This script enables the selection of specific clades after inspecting a tree in FigTree. It is important that the "Clade" is selected and colored in red (R=255, G=0,B=0; default) or any other color of choice. The color needs to be specified if it is not red.
 
 ```
 Usage:
@@ -52,15 +52,15 @@ Optional:
     --color STR   Color of highlighted clade.[#ff0000]
 ```
 
-`--tree` phylogenetic tree file. One clade is highlighted by a color (clade needs to be highlighted via FigTree). The color string attached to the sequence names is used for the extraction of the IDs of interest and used for the collection of these sequences in a new file.
+`--tree` phylogenetic tree file. One clade is highlighted by a color ('clade' needs to be highlighted via FigTree). The color string attached to the sequence names is used for the extraction of the IDs of interest and used for the collection of these sequences in a new file.
 
 `--out` output FASTA file contains the sequences of the highlighted IDs.
 
 `--seq` FASTA input file contains all sequences that were used for the phylogenetic tree construction. A subset of these sequences will be written into the output file.
 
-`--taxon` this taxon file allows to connect IDs in the tree file to different IDs in the FASTA input file. This is necessary if sequence IDs were replaced by sequence names.
+`--taxon` this taxon file allows to connect IDs in the tree file to different IDs in the FASTA input file. This is necessary if sequence IDs were replaced by sequence names after constructing the tree. If possible, the need for this option should be avoided.
 
-`--color` color that was used to highlight one clade in the tree file. Default color is red (#ff0000).
+`--color` color that was used to highlight one clade in the tree file. Default color is red (#ff0000). FigTree provides an option to set the color. The default red is R=255, G=0, and B=0.
 
 
 
