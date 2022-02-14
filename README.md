@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/456032863.svg)](https://zenodo.org/badge/latestdoi/456032863)
+
 # Apiaceae FNS I
 These scripts were applied to study the evolution of _FNS I_ in the Apiaceae. Please cite the corresponding publication when using these scripts.
 
