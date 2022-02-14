@@ -21,16 +21,18 @@ Mandatory (option2):
   --subjectdir STR         Folder containing subject sequence files.
 
 Optional:
-    --number STR        Number of BLAST hits to consider.
+    --number STR        Number of BLAST hits to consider.[10]
 ```
 
 `--baits` FASTA file containing the bait sequences.
 
 `--out` is the output folder. The folder will be created if it does not exist already.
 
-`--subject` is the subject file for the BLAST search. Candidates will be identified in this collection of sequences.
+`--subject` is the subject file for the screen via BLAST. Candidates will be identified in this collection of sequences.
 
 `--subjectdir` is a folder containig the subject files. This option allows the automatic collection of sequences from multiple different species. This option prevents the need to run the analysis multiple times with different subject files.
+
+`--number` defines how many different BLAST hits will be considered per query. A non-redundant set of sequences will be collected per subject sequence. Increasing this number make the search more sensitive, but also computationally more expensive. Default: 10.
 
 
 ## Extract sequences of highlighted clade
