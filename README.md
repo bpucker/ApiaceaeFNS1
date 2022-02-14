@@ -1,5 +1,5 @@
 # Apiaceae FNS I
-These scripts were applied to study the evolution of FNS I in the Apiaceae. Please cite the corresponding publication when using these scripts.
+These scripts were applied to study the evolution of _FNS I_ in the Apiaceae. Please cite the corresponding publication when using these scripts.
 
 
 ## Collect best BLAST hits
