@@ -93,6 +93,28 @@ Mandatory:
 
 
 
+## Expression plots
+This script generate a gene expression plot for a selection of genes based on a table of TPM values.
+
+
+```
+Usage:
+  python3 exp_plots.py --genes <FILE> --out <FILE> --exp <FILE>
+
+Mandatory:
+  --genes STR   Input file. 
+  --out   STR   Ouptut figure file.
+  --exp   STR   Expression table (TPMs).
+```
+
+`--genes` text file with one gene ID per line. It is possible to provide an additional gene symbol in the second column if both columns are tab separated. The gene ID needs to match an entry in the TPM table.
+
+`--out` specifies the output figure file. The extension of the file determines the file format. Only formats supported by matplotlib and the local system are possible.
+
+`--exp` specifies a table of expression values (TPMs).
+
+
+
 ## References
 
 
