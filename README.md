@@ -102,9 +102,14 @@ Usage:
   python3 exp_plots.py --genes <FILE> --out <FILE> --exp <FILE>
 
 Mandatory:
-  --genes STR   Input file. 
-  --out   STR   Ouptut figure file.
-  --exp   STR   Expression table (TPMs).
+  --genes     STR    Input file. 
+  --out       STR    Ouptut figure file.
+  --exp       STR    Expression table (TPMs).
+  
+Optional:
+  --cutfac    FLOAT  Outliers defining number of IQRs.
+  --logscale    -    Activates log scale [off]
+  
 ```
 
 `--genes` text file with one gene ID per line. It is possible to provide an additional gene symbol in the second column if both columns are tab separated. The gene ID needs to match an entry in the TPM table.
