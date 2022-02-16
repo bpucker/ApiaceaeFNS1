@@ -118,6 +118,9 @@ Optional:
 
 `--exp` specifies a table of expression values (TPMs).
 
+`--cutfac` sets the outlier definition. Outliers are identified by the number of IQRs between them and the median. This arguments defines how many IQRs are the cutoff. Default: 3.
+
+`--logscale` setting this flag actives a log scale in the figure. Default: linear scale.
 
 
 ## References
