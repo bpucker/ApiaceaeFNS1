@@ -1,12 +1,19 @@
 ### Boas Pucker ###
 ### bpucker@cebitec.uni-bielefeld.de ###
-### v0.1 ###
+### v0.2 ###
 
 __usage__ = """
 					python3 exp_plots.py
 					--genes <GENES_FILE>
 					--exp <EXPRESSION_FILE>
 					--out <FIGURE_OUTPUT_FILE>
+					
+					optional:
+					--cutfac <NUMBER_OF_IQRs_TO_DEFINE_OUTLIERS>
+					--logscale <THIS_ACTIVATES_LOGSCALE>[off]
+					--filteroff <SWITCHES_OUTLIER_FILTER_OFF>
+					
+					reference:  Apiaceae FNS I originated from F3H through tandem gene duplication. Boas Pucker, Massimo Iorizzo. bioRxiv 2022.02.16.480750; doi: https://doi.org/10.1101/2022.02.16.480750
 					"""
 
 import os, sys
@@ -57,7 +64,7 @@ def load_exp( exp_file ):
 	return exp, headers
 
 
-def generate_gene_exp_figure( figfile, genes, exp, gene_order, sample_names, outlier_cutoff_factor, logscale ):
+def generate_gene_exp_figure( figfile, genes, exp, gene_order, sample_names, outlier_cutoff_factor, logscale, filter_status ):
 	"""! @brief generate figure """
 	
 	universal_fontsize = 14
@@ -70,18 +77,30 @@ def generate_gene_exp_figure( figfile, genes, exp, gene_order, sample_names, out
 		# --- remove outliers --- #
 		tmp = []
 		for sample in sample_names:
-			tmp.append( exp[ sample ][ gene ] )
-		median = np.median( tmp )
-		iqr = stats.iqr( tmp )
-		valid = []
-		for k, each in enumerate( tmp ):
-			if abs( each - median ) < outlier_cutoff_factor * iqr:
-				if logscale:
-					datamatrix.append( [ "$\it{" + gene.replace( "-", "'").replace( "_", "\_" ) +"}$" , "x"+str( k ), math.log( each+1, 2) ] )
-					valid.append( math.log( each+1, 2) )
+			try:
+				tmp.append( exp[ sample ][ gene ] )
+			except KeyError:
+				pass
+		if len( tmp ) > 0:
+			median = np.median( tmp )
+			iqr = stats.iqr( tmp )
+			valid = []
+			for k, each in enumerate( tmp ):
+				if filter_status:
+					if abs( each - median ) < outlier_cutoff_factor * iqr:
+						if logscale:
+							datamatrix.append( [ "$\it{" + gene.replace( "-", "'").replace( "_", "\_" ) +"}$" , "x"+str( k ), math.log( each+1, 2) ] )
+							valid.append( math.log( each+1, 2) )
+						else:
+							datamatrix.append( [ "$\it{" + gene.replace( "-", "'").replace( "_", "\_" ) +"}$" , "x"+str( k ), each ] )
+							valid.append( each )
 				else:
-					datamatrix.append( [ "$\it{" + gene.replace( "-", "'").replace( "_", "\_" ) +"}$" , "x"+str( k ), each ] )
-					valid.append( each )
+					if logscale:
+						datamatrix.append( [ "$\it{" + gene.replace( "-", "'").replace( "_", "\_" ) +"}$" , "x"+str( k ), math.log( each+1, 2) ] )
+						valid.append( math.log( each+1, 2) )
+					else:
+						datamatrix.append( [ "$\it{" + gene.replace( "-", "'").replace( "_", "\_" ) +"}$" , "x"+str( k ), each ] )
+						valid.append( each )
 	
 		try:
 			max_val_per_gene.update( { gene: max( valid ) } )
@@ -95,6 +114,10 @@ def generate_gene_exp_figure( figfile, genes, exp, gene_order, sample_names, out
 								# [ "CHI", "x1", 5 ],
 								# [ "CHI", "x2", 7 ]
 							# ]
+	try:
+		print( sample_size )
+	except:
+		pass
 	
 	df = DataFrame( datamatrix, columns=[ "gene", "sample", "gene expression" ])
 	
@@ -123,14 +146,28 @@ def main( arguments ):
 	gene_file = arguments[ arguments.index('--genes')+1 ]
 	exp_file = arguments[ arguments.index('--exp')+1 ]
 	figfile = arguments[ arguments.index('--out')+1 ]
-	outlier_cutoff_factor = 3
-	logscale = False
+	if '--cutfac' in arguments:
+		try:
+			outlier_cutoff_factor = float( arguments[ arguments.index('--cutfac')+1 ] )
+		except:
+			outlier_cutoff_factor = 3
+	else:
+		outlier_cutoff_factor = 3
+	if "--logscale" in arguments:
+		logscale = True
+	else:
+		logscale = False
+	
+	if '--filteroff' in arguments:
+		filter_status = False
+	else:
+		filter_status = True
 	
 	genes, gene_order = load_genes( gene_file )
 
 	exp, sample_names = load_exp( exp_file )
 
-	generate_gene_exp_figure( figfile, genes, exp, gene_order, sample_names, outlier_cutoff_factor, logscale )
+	generate_gene_exp_figure( figfile, genes, exp, gene_order, sample_names, outlier_cutoff_factor, logscale, filter_status )
 
 
 if '--genes' in sys.argv and '--exp' in sys.argv and '--out' in sys.argv:
