@@ -124,6 +124,41 @@ Optional:
 
 
 
+
+## Tissue-specific expression plots
+This script generate a gene expression plot for a selection of genes based on a table of TPM values and a selection of samples. One figure per specified organ/tissue will be generated.
+
+
+```
+Usage:
+  python3 exp_plot_tissue.py --genes <FILE> --out <FILE> --exp <FILE>
+
+Mandatory:
+  --genes     STR    Input file. 
+  --out       STR    Ouptut figure file.
+  --exp       STR    Expression table (TPMs).
+  --samples    STR    Sample input file.
+  
+Optional:
+  --cutfac    FLOAT  Outliers defining number of IQRs.
+  --logscale    -    Activates log scale [off]
+  
+```
+
+`--genes` text file with one gene ID per line. It is possible to provide an additional gene symbol in the second column if both columns are tab separated. The gene ID needs to match an entry in the TPM table.
+
+`--out` specifies the output figure file. The extension of the file determines the file format. Only formats supported by matplotlib and the local system are possible.
+
+`--exp` specifies a table of expression values (TPMs).
+
+`--samples` specifies a table with organ/tissue name in the first column and a comma-separated list of run IDs in the second column. Both columns are TAB-separated. The list of run IDs may contain a single ID.
+
+`--cutfac` sets the outlier definition. Outliers are identified by the number of IQRs between them and the median. This arguments defines how many IQRs are the cutoff. Default: 3.
+
+`--logscale` setting this flag actives a log scale in the figure. Default: linear scale.
+
+
+
 ## Investigate the co-expression of genes
 
 ```
@@ -164,10 +199,6 @@ Optional:
 
 
 ## construct_anno.py
-
-
-## exp_plot_tissue.py
-
 
 
 ## References
