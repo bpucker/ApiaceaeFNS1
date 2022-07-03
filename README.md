@@ -240,8 +240,7 @@ Mandatory:
 
 
 ## Run a co-expression analysis
-coexp3.py
-
+Please find all details about the co-expression analysis here: https://github.com/bpucker/CoExp.
 
 
 
