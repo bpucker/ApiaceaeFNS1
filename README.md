@@ -124,7 +124,40 @@ Optional:
 
 
 
-## coexp3.py
+## Investigate the co-expression of genes
+
+```
+Usage:
+  python3 coexp3.py --genes <FILE> --out <FILE> --exp <FILE>
+
+Mandatory:
+  --in      STR    Genes input file. 
+  --out     STR    Ouptut file.
+  --exp     STR    Expression table (TPMs).
+   
+Optional:
+  --ann     STR    Annotation file name.[off]
+  --rcut    FLOAT  Minimal correlation fector.[0.65]
+  --pcut    FLOAT  Maximal p-value cutoff[0.05]
+  --expcut  FLOAT  Minimal expression cutoff[5]
+
+  
+```
+
+`--in` text file with one gene ID per line.
+
+`--out` output file.
+
+`--exp` text file with gene expression values. Genes are in idividual rows and samples are in columns. Gene IDs need to be matching the gene IDs of interest.
+
+`--ann` annotation text file. Gene ID is given in first column and annotation string in second column if available.
+
+`--rcut` minimal correlation coefficient to consider candidate genes. Default: 0.65.
+
+`--pcut` maximal adjusted p-value to consider candidate genes. Default: 0.05.
+
+`--expcut` minimal cumulative gene expression across all samples of a species. Default: 5.
+
 
 
 ## pairwise_comp.py
