@@ -195,7 +195,24 @@ Optional:
 
 
 
-## pairwise_comp.py
+## Perform a pairwise comparison of sequences
+This script calculates the percentage of identical amino acids between all pairs of sequences in a given FASTA file.
+
+
+```
+Usage:
+  python3 pairwise_comp3.py --in <FILE> --out <FOLDER>
+
+Mandatory:
+  --in      STR    FASTA input file. 
+  --out     STR    Ouptut folder.
+  
+```
+
+`--in` specifies a multiple FASTA file that contains all sequences for the comparison. All pairs of sequences will be analyzed in global alignments constructed by MAFFT. The percentage of identical amino acid residues will be counted in the alignment.
+
+`--out` specifies the output folder. This folder will be created if it does not exist already. Temporary alignment files and the final summary file will be placed in this folder. 
+
 
 
 ## construct_anno.py
