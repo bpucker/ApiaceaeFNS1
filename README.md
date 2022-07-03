@@ -215,7 +215,34 @@ Mandatory:
 
 
 
-## construct_anno.py
+## Construct functional annotation
+This script constructs a functional annotation file for the co-expression analysis. Sequence similarity to _Arabidopsis thaliana_ is exploited to transfer functional annotation to uncharacterized sequences.
+
+```
+Usage:
+  python3 construct_anno.py --in <FILE> --out <FOLDER> --ref <FILE> --anno <FILE>
+
+Mandatory:
+  --in      STR    FASTA input file. 
+  --out     STR    Ouptut folder.
+  --ref     STR    A. thaliana reference sequence file
+  --anno    STR    A. thaliana annotation file
+  
+```
+
+`--in` specifies a multiple FASTA input file with peptide sequences that need to be functionally annotated.
+
+`--out` specifies the output folder. This folder will be created if it does not exist already. Temporary files and final result files will be stored in this folder.
+
+`--ref` specifies a FASTA file containing the representative peptide sequences of _Arabidopsis thaliana_. This file is used in a sequence similarity analysis against the input sequences.
+
+`--anno` specifies an annotation file that matches the reference sequence file. 
+
+
+## Run a co-expression analysis
+coexp3.py
+
+
 
 
 ## References
