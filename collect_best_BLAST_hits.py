@@ -1,6 +1,6 @@
 ### Boas Pucker ###
-### bpucker@cebitec.uni-bielefeld.de ###
-__version__ = "v0.28"	#converted to Python3
+### b.pucker@tu-bs ###
+__version__ = "v0.29"	#converted to Python3
 
 __usage__ = """
 							python3 collect_best_BLAST_hits.py
@@ -94,6 +94,8 @@ def main( arguments ):
 			ID = str( sidx+1 )
 		if len( subject_files ) == 1:
 			output_folder = general_output_folder + ""
+			if output_folder[-1] != "/":
+				output_folder += "/"
 		else:
 			output_folder = general_output_folder + ID + "/"
 	
