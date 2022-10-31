@@ -262,8 +262,13 @@ Optional:
   
 ```
 
-`--in` specifie
+`--in` specifies the input file that contains a multiple sequence alignment in FASTA format.
 
+`--out` specifies the output file that will contain the trimmed multiple sequence alignment in FASTA format.
+
+`--occ` specifies the minimal occupancy of an alignment column. Columns with more gaps than allowed by this argument will be removed from the alignment. Default: 0.1 (10% gaps allowed).
+
+`--sort` activates the alphanumerical sorting of sequences in the output file.
 
 
 
