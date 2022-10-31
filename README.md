@@ -244,6 +244,29 @@ Please find all details about the co-expression analysis here: https://github.co
 
 
 
+## Trim a multiple sequence alignment
+This script performs the trimming of a multiple sequence alignment in FASTA format and returns a FASTA file.
+
+
+```
+Usage:
+  python3 algntrim.py --in <FILE> --out <FILE>
+
+Mandatory:
+  --in      STR    FASTA input file. 
+  --out     STR    Ouptut folder.
+  
+Optional:
+  --occ     FLOAT  Minimal column occupancy
+  --sort           Activates alphanumerical sorting
+  
+```
+
+`--in` specifie
+
+
+
+
 ## References
 
 Pucker, B. & Iorizzo M. (2022). Apiaceae FNS I originated from F3H through tandem gene duplication. bioRxiv 2022.02.16.480750; doi:[10.1101/2022.02.16.480750](https://doi.org/10.1101/2022.02.16.480750)
