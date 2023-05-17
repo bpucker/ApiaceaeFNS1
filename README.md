@@ -23,7 +23,10 @@ Mandatory (option2):
   --subjectdir STR         Folder containing subject sequence files.
 
 Optional:
-    --number STR        Number of BLAST hits to consider.[10]
+    --number STR        Number of BLAST hits to consider[10]
+    --simcut FLOAT      Minimal alignment similarity[30.0]
+		--lencut INT        Minimal alignment length[30]
+		--cpu    INT        Number of CPUs[4]
 ```
 
 `--baits` FASTA file containing the bait sequences.
@@ -35,6 +38,12 @@ Optional:
 `--subjectdir` is a folder containig the subject files. This option allows the automatic collection of sequences from multiple different species. This option prevents the need to run the analysis multiple times with different subject files.
 
 `--number` defines how many different BLAST hits will be considered per query. A non-redundant set of sequences will be collected per subject sequence. Increasing this number make the search more sensitive, but also computationally more expensive. Default: 10.
+
+`--simcut` specifies the minimal similarity cutoff. Default: 30.0. 
+
+`--lencut` specifies the minimal alignment length. Default: 30. 
+
+`--cpus` specifies the numbers of cores to use. Default: 4.
 
 
 ## Extract sequences of highlighted clade
