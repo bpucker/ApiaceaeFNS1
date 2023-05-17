@@ -1,13 +1,18 @@
 ### Boas Pucker ###
 ### b.pucker@tu-bs ###
-__version__ = "v0.29"	#converted to Python3
+__version__ = "v0.3"	#converted to Python3
 
 __usage__ = """
 							python3 collect_best_BLAST_hits.py
 							--baits <BAIT_FILE>
 							--subject <SUBJECT_FILE>|--subjectdir <FOLDER_WITH_SUBJECT_FILES>
 							--out <OUTPUT_FOLDER>
-							--number <INT>
+							
+							optional:
+							--number <NUMBER_OF_SEQS_PER_BAIT, INT>[10]
+							--simcut <MINIMAL_ALIGNMENT_SIMILARITY, FLOAT>[30.0]
+							--lencut <MINIMAL_ALIGNMENT_LENGTH, INT>[30]
+							--cpu <NUMBER_OF_CPUS, INT>[4]
 							"""
 
 import os, sys, subprocess, glob
@@ -15,7 +20,7 @@ from operator import itemgetter
 
 # --- end of imports --- #
 
-def load_best_blast_hits( blast_result_file, number ):
+def load_best_blast_hits( blast_result_file, number, simcut, lencut ):
 	"""! @brief load best blast hit per query """
 	
 	# --- initial loading --- #
@@ -24,10 +29,12 @@ def load_best_blast_hits( blast_result_file, number ):
 		line = f.readline()
 		while line:
 			parts = line.strip().split('\t')
-			try:
-				best_hits[ parts[0] ].append( { 'score': float( parts[-1] ), 'seqID': parts[1] } )
-			except:
-				best_hits.update( { parts[0]: [ { 'score': float( parts[-1] ), 'seqID': parts[1] } ] } )
+			if float( parts[2] ) >= simcut:
+				if int( parts[3] ) >= lencut:
+					try:
+						best_hits[ parts[0] ].append( { 'score': float( parts[-1] ), 'seqID': parts[1] } )
+					except:
+						best_hits.update( { parts[0]: [ { 'score': float( parts[-1] ), 'seqID': parts[1] } ] } )
 			line = f.readline()
 	
 	selected_hits = []
@@ -84,8 +91,19 @@ def main( arguments ):
 		number = int( arguments[ arguments.index('--number')+1 ] )
 	else:
 		number = 10
+	if '--cpu' in arguments:
+		cpu = int( arguments[ arguments.index('--cpu')+1 ] )
+	else:
+		cpu = 4
+	if '--simcut' in arguments:
+		simcut =float( arguments[ arguments.index('--simcut')+1 ] )
+	else:
+		simcut = 30.0
+	if '--lencut' in arguments:
+		lencut = int( arguments[ arguments.index('--lencut')+1 ] )
+	else:
+		lencut = 30
 	
-	cpu = 4
 	
 	for sidx, subject_file in enumerate( subject_files ):
 		try:
@@ -114,7 +132,7 @@ def main( arguments ):
 			p.communicate()
 		
 		# --- load best BLAST hits per query --- #
-		best_blast_hits =  load_best_blast_hits( result_file, number )
+		best_blast_hits =  load_best_blast_hits( result_file, number, simcut, lencut )
 		
 		# --- collect sequences --- #
 		seqs = load_sequences( subject_file )
