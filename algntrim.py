@@ -1,10 +1,13 @@
 ### Boas Pucker ###
 ### b.pucker@tu-bs.de ###
-### v0.1 ###
 
 ### some functions derived from KIPEs (Pucker et al., 2020: https://doi.org/10.3390/plants9091103) ###
 
-__cite__ = """Pucker, B. & Iorizzo M. (2022). Apiaceae FNS I originated from F3H through tandem gene duplication. bioRxiv 2022.02.16.480750; doi:10.1101/2022.02.16.480750"""
+__description__ = "Removes all columns from an alignment that exceed a certain percentage of gaps. This shortens the alignment and reduces the computational costs for inferring a phylogenetic tree"
+
+__version__ = "v0.15"
+
+__reference__ = """Pucker, B. & Iorizzo M. (2022). Apiaceae FNS I originated from F3H through tandem gene duplication. PLoS ONE 18(1): e0280155. https://doi.org/10.1371/journal.pone.0280155"""
 
 __usage__ = """
 					python3 algntrim.py
@@ -122,5 +125,9 @@ def main( arguments ):
 
 if '--in' in sys.argv and '--out' in sys.argv:
 	main( sys.argv )
+elif '--version' in sys.argv:
+	sys.exit( __version__ )
+elif '--reference' in sys.argv or '--cite' in sys.argv:
+	sys.exit( __reference__ )
 else:
-	sys.exit( __usage__ )
+	sys.exit( __description__ + "\n" + __version__ + "\n" + __usage__ + "\n" + __reference__ )
